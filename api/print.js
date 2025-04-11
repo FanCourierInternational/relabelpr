@@ -1,5 +1,12 @@
-// api/print.js
 export default async function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*"); // 👈 Allow all origins
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end(); // 👈 Preflight response
+  }
+
   const { awbno } = req.query;
   const apiKey = process.env.CM_API_KEY;
 
